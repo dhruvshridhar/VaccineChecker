@@ -161,7 +161,7 @@ begin
     Form1.IdHTTP1.Get(geturl,resp);
     resp.Position:=0;
     str:=Form1.MemoryStreamToString(resp);
-    resJson := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(strSample),0) as TJSONObject;
+    resJson := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(str),0) as TJSONObject;
   finally
     resp.Free;
   end;
