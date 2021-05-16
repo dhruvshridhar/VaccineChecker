@@ -3,7 +3,7 @@ object Form1: TForm1
   Top = 0
   Caption = 'Search Vaccine'
   ClientHeight = 550
-  ClientWidth = 500
+  ClientWidth = 314
   Position = DesktopCenter
   Quality = HighQuality
   FormFactor.Width = 320
@@ -15,7 +15,7 @@ object Form1: TForm1
     TabOrder = 0
     Position.X = 96.000000000000000000
     Position.Y = 48.000000000000000000
-    Size.Width = 377.000000000000000000
+    Size.Width = 201.000000000000000000
     Size.Height = 32.000000000000000000
     Size.PlatformDefault = False
   end
@@ -23,7 +23,7 @@ object Form1: TForm1
     Cursor = crHandPoint
     Position.X = 96.000000000000000000
     Position.Y = 160.000000000000000000
-    Size.Width = 185.000000000000000000
+    Size.Width = 97.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 1
@@ -35,11 +35,11 @@ object Form1: TForm1
     DataDetectorTypes = []
     Position.X = 96.000000000000000000
     Position.Y = 232.000000000000000000
-    Size.Width = 377.000000000000000000
+    Size.Width = 201.000000000000000000
     Size.Height = 209.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 2
-    Viewport.Width = 373.000000000000000000
+    Viewport.Width = 197.000000000000000000
     Viewport.Height = 205.000000000000000000
   end
   object pinLbl: TLabel
@@ -64,7 +64,7 @@ object Form1: TForm1
     Date = 44331.000000000000000000
     Position.X = 96.000000000000000000
     Position.Y = 104.000000000000000000
-    Size.Width = 377.000000000000000000
+    Size.Width = 201.000000000000000000
     Size.Height = 32.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 8
@@ -82,14 +82,14 @@ object Form1: TForm1
     Enabled = False
     Interval = 5000
     OnTimer = Timer1Timer
-    Left = 360
+    Left = 168
     Top = 456
   end
   object stopBtn: TButton
     Cursor = crHandPoint
-    Position.X = 296.000000000000000000
+    Position.X = 200.000000000000000000
     Position.Y = 160.000000000000000000
-    Size.Width = 177.000000000000000000
+    Size.Width = 97.000000000000000000
     Size.Height = 41.000000000000000000
     Size.PlatformDefault = False
     TabOrder = 14
@@ -97,9 +97,9 @@ object Form1: TForm1
     OnClick = stopBtnClick
   end
   object statusLbl: TLabel
-    Position.X = 224.000000000000000000
+    Position.X = 136.000000000000000000
     Position.Y = 208.000000000000000000
-    TabOrder = 21
+    TabOrder = 20
   end
   object IdHTTP1: TIdHTTP
     AllowCookies = True
@@ -115,12 +115,12 @@ object Form1: TForm1
     Request.Ranges.Units = 'bytes'
     Request.Ranges = <>
     HTTPOptions = [hoForceEncodeParams]
-    Left = 424
+    Left = 232
     Top = 456
   end
   object IdSMTP1: TIdSMTP
     SASLMechanisms = <>
-    Left = 393
+    Left = 201
     Top = 456
   end
   object IdSSLIOHandlerSocketOpenSSL1: TIdSSLIOHandlerSocketOpenSSL
@@ -130,11 +130,11 @@ object Form1: TForm1
     SSLOptions.Mode = sslmUnassigned
     SSLOptions.VerifyMode = []
     SSLOptions.VerifyDepth = 0
-    Left = 456
+    Left = 264
     Top = 456
   end
   object NotificationCenter1: TNotificationCenter
-    Left = 328
+    Left = 136
     Top = 456
   end
 end
