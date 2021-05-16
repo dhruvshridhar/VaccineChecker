@@ -35,9 +35,9 @@ type
     DateEdit1: TDateEdit;
     dateLbl: TLabel;
     Timer1: TTimer;
-    spinner: TAniIndicator;
     stopBtn: TButton;
     NotificationCenter1: TNotificationCenter;
+    statusLbl: TLabel;
     procedure showBtnClick(Sender: TObject);
     function MemoryStreamToString(aStream: TMemoryStream): string;
     procedure Timer1Timer(Sender: TObject);
@@ -82,11 +82,13 @@ procedure TForm1.showBtnClick(Sender: TObject);
 begin
   Timer1Timer(Sender);
   Timer1.Enabled:=true;
+  statusLbl.Text:='Searching';
 end;
 
 procedure TForm1.stopBtnClick(Sender: TObject);
 begin
 Timer1.Enabled:=false;
+statusLbl.Text:='';
 end;
 
 procedure TForm1.Timer1Timer(Sender: TObject);
@@ -94,7 +96,6 @@ var
 FThread:TDemoThread;
 begin
 // dfd
-  spinner.Enabled:=true;
   FThread := TDemoThread.Create( True );
   FThread.FreeOnTerminate := True;
 //  FThread.OnTerminate := DoTerminate;
@@ -161,7 +162,7 @@ begin
     Form1.IdHTTP1.Get(geturl,resp);
     resp.Position:=0;
     str:=Form1.MemoryStreamToString(resp);
-    resJson := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(str),0) as TJSONObject;
+    resJson := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(strSample),0) as TJSONObject;
   finally
     resp.Free;
   end;
@@ -203,6 +204,7 @@ for I := 0 to jsonAry.Size-1 do
         MyNotification.AlertBody:='Name: '+ sessObj.GetValue('name').ToString+#13#10+'Address: '+sessObj.GetValue('address').ToString;
         Form1.NotificationCenter1.PresentNotification(MyNotification);
         Form1.Timer1.Enabled:=false;
+        Form1.statusLbl.Text:='';
       end
       else
       begin
@@ -210,7 +212,6 @@ for I := 0 to jsonAry.Size-1 do
       end;
 
     end;
-    Form1.spinner.Enabled:=false;
     if ifNotFound<>'' then
     begin
        Form1.resultMem.Lines.Add(ifNotFound);
