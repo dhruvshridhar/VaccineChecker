@@ -180,8 +180,10 @@ var
   I:integer;
   resJson:TJSONObject;
   MyNotification:TNotification;
+  ifNotFound:string;
 begin
 resJson:=Form1.fetchRes;
+ifNotFound:='';
 jsonAry:= resJson.GetValue('centers') as TJSONArray;
 for I := 0 to jsonAry.Size-1 do
     begin
@@ -204,11 +206,15 @@ for I := 0 to jsonAry.Size-1 do
       end
       else
       begin
-        Form1.resultMem.Lines.Add('No slots found! Checking again in 5 seconds!!');
+        ifNotFound:='No slots found! Checking again in 5 seconds!!';
       end;
 
     end;
     Form1.spinner.Enabled:=false;
+    if ifNotFound<>'' then
+    begin
+       Form1.resultMem.Lines.Add(ifNotFound);
+    end;
 end;
 
 end.
