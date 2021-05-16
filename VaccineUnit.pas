@@ -9,12 +9,11 @@ uses
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, IdIOHandler,
   IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
   IdExplicitTLSClientServerBase, IdMessageClient, IdSMTPBase, IdSMTP,
-  FMX.DateTimeCtrls, System.JSON, FetchDataUnit;
+  FMX.DateTimeCtrls, System.JSON, FetchDataUnit, System.Notification;
 
 type
   TDemoThread = class( TThread )
   protected
-    FProgress : Integer;
 
   protected
     procedure Execute(); override;
@@ -38,6 +37,7 @@ type
     Timer1: TTimer;
     spinner: TAniIndicator;
     stopBtn: TButton;
+    NotificationCenter1: TNotificationCenter;
     procedure showBtnClick(Sender: TObject);
     function MemoryStreamToString(aStream: TMemoryStream): string;
     procedure Timer1Timer(Sender: TObject);
@@ -161,7 +161,7 @@ begin
     Form1.IdHTTP1.Get(geturl,resp);
     resp.Position:=0;
     str:=Form1.MemoryStreamToString(resp);
-    resJson := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(str),0) as TJSONObject;
+    resJson := TJSONObject.ParseJSONValue(TEncoding.UTF8.GetBytes(strSample),0) as TJSONObject;
   finally
     resp.Free;
   end;
@@ -179,6 +179,7 @@ var
   jsonAry:TJSONArray;
   I:integer;
   resJson:TJSONObject;
+  MyNotification:TNotification;
 begin
 resJson:=Form1.fetchRes;
 jsonAry:= resJson.GetValue('centers') as TJSONArray;
@@ -193,6 +194,13 @@ for I := 0 to jsonAry.Size-1 do
         Form1.resultMem.Lines.Add('Name: '+sessObj.GetValue('name').ToString);
         Form1.resultMem.Lines.Add('Address : '+sessObj.GetValue('address').ToString);
         Form1.resultMem.Lines.Add('');
+
+        MyNotification:=Form1.NotificationCenter1.CreateNotification;
+        MyNotification.Name:='Vaccination Slot Found!!';
+        MyNotification.Title:='Vaccination Slot Found!!';
+        MyNotification.AlertBody:='Name: '+ sessObj.GetValue('name').ToString+#13#10+'Address: '+sessObj.GetValue('address').ToString;
+        Form1.NotificationCenter1.PresentNotification(MyNotification);
+        Form1.Timer1.Enabled:=false;
       end
       else
       begin
